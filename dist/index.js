@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const main_js_1 = require("./main.js");
+const calc_js_1 = require("./src/modules/calc.js");
+const product_js_1 = require("./src/modules/product.js");
+const title = 'Quadrocopter';
+const price = 5_000;
+const count = 5;
+const result = (0, calc_js_1.calcTotalPrice)(product_js_1.product);
+const carResult = (0, main_js_1.totalVerdict)(main_js_1.car);
