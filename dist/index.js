@@ -1,10 +1,24 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const main_js_1 = require("./main.js");
-const calc_js_1 = require("./src/modules/calc.js");
-const product_js_1 = require("./src/modules/product.js");
-const title = 'Quadrocopter';
-const price = 5_000;
-const count = 5;
-const result = (0, calc_js_1.calcTotalPrice)(product_js_1.product);
-const carResult = (0, main_js_1.totalVerdict)(main_js_1.car);
+const div = (a, b, rounding) => {
+    const res = a / b;
+    if (rounding) {
+        return Math.round(res);
+    }
+    else {
+        return res;
+    }
+};
+div(15, 5, true);
+// div(15, 3, false);
+div(10, 2);
+const fetchData = (res) => {
+    if (res.status === 'pending') {
+        res.status;
+    }
+    if (res.status === 'success') {
+        res.data;
+    }
+    if (res.status === 'failed') {
+        res.error;
+    }
+};

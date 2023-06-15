@@ -1,11 +1,53 @@
-import { car, totalVerdict } from "./main.js";
-import { calcTotalPrice } from "./src/modules/calc.js";
-import { product } from "./src/modules/product.js";
+const div = (a: number, b: number, rounding?: true): number => {
+	const res = a / b;
 
-const title: string = 'Quadrocopter';
-const price: number = 5_000;
-const count: number = 5;
+	if (rounding) {
+		return Math.round(res);
+	} else {
+		return res;
+	}
+};
 
-const result: string = calcTotalPrice(product);
+div(15, 5, true);
+// div(15, 3, false);
+div(10, 2);
 
-const carResult = totalVerdict(car);
+type Student = {
+	firstname: string;
+	lastname: string;
+	age: number;
+	bornCity?: string;
+};
+
+
+// contracts
+type HttpResponsePending = {
+	status: 'pending';
+};
+
+type HttpResponseSuccess = {
+	status: 'success';
+	data: [];
+};
+
+type HttpResponseFailed = {
+	status: 'failed';
+	error: string;
+};
+
+type HttpResponse = 
+	| HttpResponsePending
+	| HttpResponseSuccess
+	| HttpResponseFailed;
+
+const fetchData = (res: HttpResponse): void => {
+	if (res.status === 'pending') {
+		res.status
+	}
+	if(res.status === 'success') {
+		res.data
+	}
+	if(res.status === 'failed') {
+		res.error
+	}
+};
