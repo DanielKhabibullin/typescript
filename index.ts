@@ -1,53 +1,62 @@
-const div = (a: number, b: number, rounding?: true): number => {
-	const res = a / b;
 
-	if (rounding) {
-		return Math.round(res);
-	} else {
-		return res;
-	}
-};
 
-div(15, 5, true);
-// div(15, 3, false);
-div(10, 2);
+const cat1 = {
+	name: 'Мурка',
+	age: 3,
+	breed: 'дворняга',
+	voice: 'Мяу',
+}
 
-type Student = {
-	firstname: string;
-	lastname: string;
+// const cat2 = <animal> {
+// 	name: 'Мурка',
+// 	age: 3,
+// 	breed: 'дворняга',
+// 	voice: 'Мяу',
+// }
+
+type animal = {
+	type: 'animal';
+	name: string;
 	age: number;
-	bornCity?: string;
+	habitat: string;
+	family: string;
+}
+
+type pet = {
+	type: 'pet',
+	name: string;
+	home: string;
+	age: number;
+	breed: string;
 };
 
+// const myCat: pet = {
+// 	...cat1,
+// 	home: 'Деревня',
+// 	owner: {
+// 		firstName: 'Иван',
+// 	}
+// } as pet;
 
-// contracts
-type HttpResponsePending = {
-	status: 'pending';
-};
+// console.log(myCat);
 
-type HttpResponseSuccess = {
-	status: 'success';
-	data: [];
-};
-
-type HttpResponseFailed = {
-	status: 'failed';
-	error: string;
-};
-
-type HttpResponse = 
-	| HttpResponsePending
-	| HttpResponseSuccess
-	| HttpResponseFailed;
-
-const fetchData = (res: HttpResponse): void => {
-	if (res.status === 'pending') {
-		res.status
+// const animalToPet = (animal: animal, home: string, nameOwner: string): pet => (
+// 	{
+// 		...animal,
+// 		home,
+// 		owner: {
+// 			firstName: nameOwner,
+// 		}
+// 	}
+// );
+const handle = (val: animal | pet) => {
+	// if (val.type === 'animal') {
+	// 	console.log(val.habitat);
+	// } else {
+	// 	console.log(val.breed);
+	// }
+	if ('habitat' in val) {
+	console.log(val.family);
 	}
-	if(res.status === 'success') {
-		res.data
-	}
-	if(res.status === 'failed') {
-		res.error
-	}
 };
+// const myCat: pet = animalToPet(cat1, 'Деревня', 'Иван');

@@ -1,11 +1,10 @@
-
-type User = {
+interface User {
 	name: string;
 	age: number;
 	group: string;
-};
+}
 
-type Admin = {
+interface Admin {
 	name: string;
 	age: number;
 	role: string;
@@ -46,8 +45,19 @@ const persons: Person[] = [
 	}
 ];
 
-const logPerson = (user: Person): void => {
-	console.log(`${user.name}, ${user.age}`);
-}
+const isUser0 = (person: Person): person is User => 'group' in person;
+
+const isUser1 = (person: Person): person is User => {
+	return 'group' in person && person.group !== undefined;
+};
+
+const isUser2 = (person: Person): person is User => {
+	return (person as User).group !== undefined;
+};
+
+const logPerson = (person: Person) => {
+	const information: string	= isUser0(person) ? person.group : person.role;
+	console.log(`${person.name}, ${person.age}, ${information}`);
+};
 
 persons.forEach(logPerson);

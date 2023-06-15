@@ -31,7 +31,15 @@ const persons = [
         role: 'администратор',
     }
 ];
-const logPerson = (user) => {
-    console.log(`${user.name}, ${user.age}`);
+const isUser0 = (person) => 'group' in person;
+const isUser1 = (person) => {
+    return 'group' in person && person.group !== undefined;
+};
+const isUser2 = (person) => {
+    return person.group !== undefined;
+};
+const logPerson = (person) => {
+    const information = isUser0(person) ? person.group : person.role;
+    console.log(`${person.name}, ${person.age}, ${information}`);
 };
 persons.forEach(logPerson);
