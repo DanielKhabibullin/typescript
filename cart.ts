@@ -4,8 +4,22 @@ interface Goods {
 	price: number;
 }
 
+type KeysOfGoods = keyof Goods;
+
+const filter0 = (arr: Goods[], key: KeysOfGoods, value: Goods[KeysOfGoods]) => {
+	return arr.filter((goods: Goods) => goods[key] === value);
+}
+
+const filter1 = <T, K extends keyof T>(arr: T[], key: K, value: T[K]) => {
+	return arr.filter((item: T) => item[key] === value);
+}
+
+const categories = ['notebook', 'TV', 'phone'] as const;
+
+type categoryTypes = typeof categories[number];
+
 abstract class Cart<T extends Goods> {
-	protected goods: T[] = [];
+	public goods: T[] = [];
 
 	public add(item: T): void {
 		this.goods.push(item);
@@ -40,11 +54,31 @@ techCart.add({
 	price: 100,
 	type: 'notebook',
 	description: 'notebook',
+});
+
+techCart.add({
+	title: 'TV',
+	count: 2,
+	price: 50,
+	type: 'TV',
+	description: 'TV',
+});
+
+techCart.add({
+	title: 'phone',
+	count: 3,
+	price: 150,
+	type: 'phone',
+	description: 'phone',
 })
 
-console.log(techCart.totalPrice);
+const res = filter1(techCart.goods, 'price', 150);
 
-console.log(techCart.get('note'));
+console.log(res);
+
+// console.log(techCart.totalPrice);
+
+// console.log(techCart.get('note'));
 
 // const getCountGoods = <T extends {title: string, count: number}>(arr: T[], title: string): number => {
 // 	const goods = arr.find((item) => item.title === title);
@@ -70,3 +104,23 @@ console.log(techCart.get('note'));
 // console.log('countP: ', countP);
 // const countN = getCountGoods(goods, 'vacuum cleaner');
 // console.log('countN: ', countN);
+
+const goods0: TechCart['goods'][number] = {
+		title: 'notebook',
+		count: 1,
+		price: 100,
+		type: 'notebook',
+		description: 'notebook',
+};
+const goods1: typeof goods0 = {
+	title: 'phone',
+	count: 3,
+	price: 150,
+	type: 'phone',
+	description: 'phone',
+}
+
+type keyOfGoods = keyof typeof goods1;
+
+const keys: keyOfGoods = 'type';
+

@@ -4,6 +4,7 @@ interface User {
 	surname: string;
 	age: number;
 }
+type KeysOfUser = keyof User;
 
 interface Student extends User {
 	year: number;
