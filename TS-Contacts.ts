@@ -56,23 +56,6 @@ const persons: Person[] = [
 const isAdmin = (person: Person): person is Admin => person.type === 'admin';
 const isUser = (person: Person): person is User => person.type === 'user';
 
-// const isUser0 = (person: Person): person is User => 'group' in person;
-
-// const isUser1 = (person: Person): person is User => {
-// 	return 'group' in person && person.group !== undefined;
-// };
-
-// const isUser2 = (person: Person): person is User => {
-// 	return (person as User).group !== undefined;
-// };
-
-// const logPerson0 = (person: Person) => {
-// 	const information: string	= isUser0(person) ? person.group : person.role;
-// 	console.log(`${person.name}, ${person.age}, ${information}`);
-// };
-
-// persons.forEach(logPerson0);
-
 const logPerson = (person: Person) => {
 	let information = '';
 	
@@ -99,11 +82,18 @@ persons.filter(isUser).filter((user) => {
 		return criteriaKeys.every((fieldName) => admin[fieldName] === criteria[fieldName]);
 	});
 
-console.log('Admin(s) of age 24:');
+	const filterPersons = <T extends Person>(persons: Person[], criteria: Partial<T>): T[] =>
+	persons.filter((person): person is T => person.type === criteria.type).filter((person) => {
+		const criteriaKeys = Object.keys(criteria) as (keyof T)[];
+		return criteriaKeys.every((fieldName) => person[fieldName] === criteria[fieldName]);
+	});
 
-filterAdmins(
-	persons,
-	{
-			age: 24
-	}
-).forEach(logPerson);
+	const filteredUsers = filterPersons(persons, { type: 'user', group: 'музыкант' });
+	console.log(filteredUsers);
+
+// filterAdmins(
+// 	persons,
+// 	{
+// 			age: 24
+// 	}
+// ).forEach(logPerson);
