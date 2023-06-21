@@ -88,8 +88,7 @@ persons.filter(isUser).filter((user) => {
 		return criteriaKeys.every((fieldName) => person[fieldName] === criteria[fieldName]);
 	});
 
-	const filteredUsers = filterPersons(persons, { type: 'user', group: 'музыкант' });
-	console.log(filteredUsers);
+filterPersons(persons, { type: 'user', group: 'музыкант' }).forEach(logPerson);
 
 // filterAdmins(
 // 	persons,
